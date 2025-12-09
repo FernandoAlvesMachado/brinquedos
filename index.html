@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invictus Locações e Eventos | Aluguel de Brinquedos</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS (ESTILOS) --- */
+        :root {
+            /* Paleta de Cores baseada na Logo */
+            --primary-blue: #003366;
+            --accent-blue: #00a8e8;
+            --primary-pink: #e91e63;
+            --primary-yellow: #ffcc00;
+            --primary-green: #4caf50;
+            --primary-orange: #ff5722;
+            --bg-light: #fdfbf7;
+            --text-dark: #333;
+            --font-main: 'Fredoka', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Utilitários */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-pink);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .btn-warning {
+            background-color: var(--primary-yellow);
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+            /* Tamanho da logo */
+            object-fit: contain;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-pink);
+        }
+
+        .btn-nav {
+            background: var(--primary-blue);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Hero Section (Topo) */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-blue) 100%);
+            color: white;
+            padding: 80px 0 150px 0;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-text .highlight {
+            color: var(--primary-yellow);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            width: 400px;
+            height: 400px;
+        }
+
+        .hero-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 5px solid white;
+            animation: floatHero 4s ease-in-out infinite;
+        }
+
+        @keyframes floatHero {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Formas Flutuantes no Fundo */
+        .shape {
+            position: absolute;
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            background: var(--primary-pink);
+            top: -50px;
+            left: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-yellow);
+            bottom: 100px;
+            right: 10%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            background: var(--primary-green);
+            top: 20%;
+            right: 40%;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .wave-bottom {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .pulsate {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(233, 30, 99, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(233, 30, 99, 0);
+            }
+        }
+
+        /* Produtos */
+        .products {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-blue);
+        }
+
+        .color-blue {
+            color: var(--accent-blue);
+        }
+
+        .color-pink {
+            color: var(--primary-pink);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-bottom: 5px solid var(--accent-blue);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card:nth-child(2n) {
+            border-bottom-color: var(--primary-pink);
+        }
+
+        .card:nth-child(3n) {
+            border-bottom-color: var(--primary-green);
+        }
+
+        .card:nth-child(4n) {
+            border-bottom-color: var(--primary-orange);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .card-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #25D366;
+            color: white;
+            padding: 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .card-btn:hover {
+            background: #1ebc57;
+        }
+
+        /* Combos */
+        .combos {
+            background-image: url('https://images.unsplash.com/photo-1533227268875-1e716041a4e1?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 100px 0;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .combos::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 51, 102, 0.85);
+        }
+
+        .combo-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+
+        .combo-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .combo-text p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #fff0f5;
+        }
+
+        .testimonial-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex: 1 1 300px;
+            max-width: 350px;
+        }
+
+        .stars {
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .testimonial-card h4 {
+            color: var(--primary-blue);
+            text-align: right;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 50px 0 20px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo h3 {
+            font-size: 2rem;
+            color: var(--primary-yellow);
+        }
+
+        .footer-contact h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+        }
+
+        .socials a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .socials a:hover {
+            color: var(--primary-pink);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: white;
+                text-align: center;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-top: 30px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-btns {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .btn-whatsapp {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo-container">
+                <img src="img/logo.jpeg" alt="Invictus Locações" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#brinquedos">Brinquedos</a></li>
+                <li><a href="#combos">Combos</a></li>
+                <li><a href="#feedbacks">Depoimentos</a></li>
+                <li><a href="#contato" class="btn-nav">Fale Conosco</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>A Diversão Chegou em <span class="highlight">Goiânia!</span></h1>
+                <p>Transforme sua festa em um evento inesquecível com os melhores brinquedos da região.</p>
+                <div class="hero-btns">
+                    <a href="#brinquedos" class="btn btn-primary pulsate">Ver Brinquedos</a>
+                    <a href="https://wa.me/5562984132889?text=Olá! Gostaria de um orçamento geral para minha festa."
+                        target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Orçamento Rápido</a>
+                </div>
+            </div>
+            <div class="hero-img-container">
+                <img src="img/low-angle-smiley-boy-bounce-house.jpg" alt="Crianças brincando" class="hero-main-img">
+            </div>
+        </div>
+        <div class="wave-bottom">
+            <svg viewBox="0 0 1440 320">
+                <path fill="#fdfbf7" fill-opacity="1"
+                    d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="brinquedos" class="products">
+        <div class="container">
+            <h2 class="section-title">Escolha sua <span class="color-blue">Diversão</span></h2>
+            <div class="grid-container" id="toys-grid">
+            </div>
+        </div>
+    </section>
+
+    <section id="combos" class="combos">
+        <div class="container combo-content">
+            <div class="combo-text">
+                <h2>Monte seu Pacote Personalizado!</h2>
+                <p>Quer alugar mais de um brinquedo? Temos condições especiais para combos. Pula-pula + Piscina de
+                    Bolinhas + Pipoca? Você manda!</p>
+                <a href="https://wa.me/5562984132889?text=Olá Invictus! Gostaria de montar um pacote personalizado com vários brinquedos."
+                    target="_blank" class="btn btn-warning">Montar meu Combo Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="feedbacks" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Quem alugou, <span class="color-pink">Amou!</span></h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"O Touro Mecânico foi a atração da festa! Atendimento excelente e pontualidade na entrega aqui em
+                        Goiânia."</p>
+                    <h4>- Mariana S.</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Meus filhos amaram o Futebol de Sabão. Os brinquedos são muito novos e higienizados."</p>
+                    <h4>- Pedro H.</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Preço justo e montagem super rápida. A Invictus salvou o aniversário da minha pequena."</p>
+                    <h4>- Carla M.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <h3>Invictus Locações</h3>
+                <p>Levando alegria para Goiânia e região.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <p><i class="fab fa-whatsapp"></i> (62) 98413-2889</p>
+                <p><i class="fas fa-map-marker-alt"></i> Goiânia, GO</p>
+                <div class="socials">
+                    <a href="https://www.instagram.com/invictus.locacoes.brinquedos" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Invictus Locações e Eventos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* --- JAVASCRIPT (LÓGICA) --- */
+
+        // Dados dos Brinquedos
+        const brinquedos = [
+            {
+                nome: "Pula Pula Tradicional",
+                img: "img/pula-pula.jpeg",
+                desc: "Diversão clássica para todas as idades."
+            },
+            {
+                nome: "Pula Pula Kids",
+                img: "img/pula-pula-kids.jpeg",
+                desc: "Colorido e seguro para crianças menores."
+            },
+            {
+                nome: "Pebolim (Totó)",
+                img: "img/pebolin.jpeg",
+                desc: "A disputa perfeita para adultos e crianças."
+            },
+            {
+                nome: "Touro Mecânico",
+                img: "img/touro-mecanico.jpeg",
+                desc: "Desafie seus amigos! Quem segura mais tempo?"
+            },
+            {
+                nome: "Casa de Bolinhas",
+                img: "img/casa-de-bolinha.jpeg",
+                desc: "Mergulhe em um mundo colorido de diversão."
+            },
+            {
+                nome: "Escorregador Inflável",
+                img: "img/escorregador-inflavel.jpeg",
+                desc: "Escalada e descida emocionante com segurança."
+            },
+            {
+                nome: "Fliperama Arcade",
+                img: "img/fliperama.jpeg",
+                desc: "Nostalgia pura com milhares de jogos clássicos."
+            },
+            {
+                nome: "Futebol de Sabão",
+                img: "img/futebol-de-sabao.jpeg",
+                desc: "Escorregue, chute e divirta-se muito na água."
+            },
+            {
+                nome: "Guerra de Cotonete",
+                img: "img/guerra-de-cotonete.jpeg",
+                desc: "Gladiadores modernos! Derrube o oponente."
+            }
+        ];
+
+        const telefoneWhatsApp = "5562984132889";
+        const gridContainer = document.getElementById('toys-grid');
+
+        // Gerar Cards
+        brinquedos.forEach(brinquedo => {
+            const mensagem = encodeURIComponent(`Olá Invictus! Gostaria de saber a disponibilidade e preço do brinquedo: *${brinquedo.nome}* para minha festa.`);
+            const linkZap = `https://wa.me/${telefoneWhatsApp}?text=${mensagem}`;
+
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            card.innerHTML = `
+                <div style="overflow: hidden;">
+                    <img src="${brinquedo.img}" alt="${brinquedo.nome}" class="card-img">
+                </div>
+                <div class="card-content">
+                    <div>
+                        <h3>${brinquedo.nome}</h3>
+                        <p>${brinquedo.desc}</p>
+                    </div>
+                    <a href="${linkZap}" target="_blank" class="card-btn">
+                        <i class="fab fa-whatsapp"></i> Alugar este
+                    </a>
+                </div>
+            `;
+            gridContainer.appendChild(card);
+        });
+
+        // Menu Mobile
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Animação ao Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>
