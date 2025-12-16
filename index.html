@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invictus Locações e Eventos | Aluguel de Brinquedos</title>
+    <title>Invictus Locações e Eventos | Aluguel de Brinquedos em Goiânia</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,17 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- CSS (ESTILOS) --- */
+        /* --- CSS GERAL --- */
         :root {
-            /* Paleta de Cores baseada na Logo */
-            --primary-blue: #003366;
-            --accent-blue: #00a8e8;
-            --primary-pink: #e91e63;
-            --primary-yellow: #ffcc00;
-            --primary-green: #4caf50;
-            --primary-orange: #ff5722;
+            --blue-dark: #003366;
+            --blue-light: #00a8e8;
+            --pink: #e91e63;
+            --yellow: #ffcc00;
+            --green: #4caf50;
             --bg-light: #fdfbf7;
-            --text-dark: #333;
+            --text-gray: #555;
             --font-main: 'Fredoka', sans-serif;
         }
 
@@ -36,310 +34,304 @@
         body {
             font-family: var(--font-main);
             background-color: var(--bg-light);
-            color: var(--text-dark);
+            color: #333;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Utilitários */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
+        /* --- BOTÃO FLUTUANTE DO WHATSAPP (NOVO) --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse-green 2s infinite;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
         }
 
-        .btn-primary {
-            background-color: var(--primary-pink);
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* --- TOP BAR --- */
+        .top-bar {
+            background-color: var(--blue-dark);
             color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1001;
         }
 
-        .btn-whatsapp {
-            background-color: #25D366;
-            color: white;
-            margin-left: 10px;
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .btn-warning {
-            background-color: var(--primary-yellow);
-            color: var(--primary-blue);
-            font-size: 1.3rem;
+        .contact-info i {
+            margin-right: 5px;
+            color: var(--yellow);
         }
 
-        /* Navbar */
+        .contact-info span {
+            margin-right: 20px;
+        }
+
+        /* --- NAVBAR --- */
         .navbar {
             background: white;
-            padding: 10px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .nav-content {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            height: 80px;
-            /* Tamanho da logo */
-            object-fit: contain;
+        .logo img {
+            height: 70px;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--primary-blue);
+            color: var(--blue-dark);
             font-weight: 600;
-            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary-pink);
+            color: var(--pink);
         }
 
-        .btn-nav {
-            background: var(--primary-blue);
+        .btn-whatsapp-nav {
+            background-color: #25D366;
             color: white !important;
             padding: 8px 20px;
-            border-radius: 20px;
+            border-radius: 30px;
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            cursor: pointer;
-        }
-
-        /* Hero Section (Topo) */
+        /* --- HERO (COM GALERIA INFINITA) --- */
         .hero {
             position: relative;
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-blue) 100%);
-            color: white;
-            padding: 80px 0 150px 0;
+            height: 600px;
             overflow: hidden;
-        }
-
-        .hero-content {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-text {
-            flex: 1;
-            padding-right: 50px;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero-text .highlight {
-            color: var(--primary-yellow);
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .hero-img-container {
-            flex: 1;
-            display: flex;
             justify-content: center;
-            width: 400px;
-            height: 400px;
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
         }
 
-        .hero-main-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 5px solid white;
-            animation: floatHero 4s ease-in-out infinite;
-        }
-
-        @keyframes floatHero {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-
-        /* Formas Flutuantes no Fundo */
-        .shape {
+        /* 1. Camada da Galeria (Fundo) */
+        .sliding-background {
             position: absolute;
-            opacity: 0.2;
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            height: 100%;
+            display: flex;
+            width: calc(350px * 18);
+            animation: slide 60s linear infinite;
             z-index: 1;
         }
 
-        .shape-1 {
-            width: 200px;
-            height: 200px;
-            background: var(--primary-pink);
-            top: -50px;
-            left: -50px;
-            animation: float 6s ease-in-out infinite;
+        .sliding-background img {
+            height: 100%;
+            width: 350px;
+            object-fit: cover;
         }
 
-        .shape-2 {
-            width: 150px;
-            height: 150px;
-            background: var(--primary-yellow);
-            bottom: 100px;
-            right: 10%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        .shape-3 {
-            width: 100px;
-            height: 100px;
-            background: var(--primary-green);
-            top: 20%;
-            right: 40%;
-            animation: float 5s ease-in-out infinite;
-        }
-
-        @keyframes float {
+        @keyframes slide {
             0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
+                transform: translateX(0);
             }
 
             100% {
-                transform: translateY(0px);
+                transform: translateX(calc(-350px * 9));
             }
         }
 
-        .wave-bottom {
+        /* 2. Camada de Sobreposição Azul (Overlay) */
+        .hero-overlay {
             position: absolute;
-            bottom: -5px;
+            top: 0;
             left: 0;
             width: 100%;
-            line-height: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 168, 232, 0.50) 0%, rgba(0, 51, 102, 0.95) 100%);
+            z-index: 2;
         }
 
-        .pulsate {
-            animation: pulse 2s infinite;
+        /* 3. Camada de Conteúdo (Texto) */
+        .hero .container {
+            position: relative;
+            z-index: 3;
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7);
-            }
-
-            70% {
-                box-shadow: 0 0 0 15px rgba(233, 30, 99, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(233, 30, 99, 0);
-            }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Produtos */
-        .products {
-            padding: 60px 0;
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn-cta {
+            background-color: var(--yellow);
+            color: var(--blue-dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- OUTRAS SEÇÕES --- */
+        .features-strip {
+            margin-top: -40px;
+            padding-bottom: 60px;
+            position: relative;
+            z-index: 4;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--pink);
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            color: var(--blue-dark);
+            margin-bottom: 5px;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .bg-white {
+            background-color: white;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
+            color: var(--blue-dark);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-gray);
             margin-bottom: 50px;
-            color: var(--primary-blue);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .color-blue {
-            color: var(--accent-blue);
-        }
-
-        .color-pink {
-            color: var(--primary-pink);
-        }
-
-        .grid-container {
+        /* Produtos Grid */
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .card {
+        .product-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-bottom: 5px solid var(--accent-blue);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            border-bottom: 4px solid var(--blue-light);
             display: flex;
             flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-bottom-color: var(--pink);
         }
 
-        .card:nth-child(2n) {
-            border-bottom-color: var(--primary-pink);
-        }
-
-        .card:nth-child(3n) {
-            border-bottom-color: var(--primary-green);
-        }
-
-        .card:nth-child(4n) {
-            border-bottom-color: var(--primary-orange);
-        }
-
-        .card-img {
+        .product-img {
             width: 100%;
             height: 220px;
             object-fit: cover;
         }
 
-        .card-content {
+        .product-info {
             padding: 20px;
             flex-grow: 1;
             display: flex;
@@ -347,163 +339,155 @@
             justify-content: space-between;
         }
 
-        .card h3 {
-            font-size: 1.5rem;
+        .product-info h3 {
+            color: var(--blue-dark);
             margin-bottom: 10px;
-            color: var(--primary-blue);
         }
 
-        .card-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background: #25D366;
-            color: white;
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-
-        .card-btn:hover {
-            background: #1ebc57;
-        }
-
-        /* Combos */
-        .combos {
-            background-image: url('https://images.unsplash.com/photo-1533227268875-1e716041a4e1?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover;
-            background-attachment: fixed;
-            padding: 100px 0;
-            position: relative;
-            margin-top: 60px;
-        }
-
-        .combos::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 51, 102, 0.85);
-        }
-
-        .combo-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            color: white;
-        }
-
-        .combo-text h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .combo-text p {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-        }
-
-        /* Depoimentos */
-        .testimonials {
-            padding: 80px 0;
-            background-color: #fff0f5;
-        }
-
-        .testimonial-grid {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            flex: 1 1 300px;
-            max-width: 350px;
-        }
-
-        .stars {
-            color: var(--primary-yellow);
+        .product-info p {
+            font-size: 0.9rem;
+            color: #666;
             margin-bottom: 15px;
         }
 
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #555;
+        .btn-card {
+            background-color: var(--green);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
         }
 
-        .testimonial-card h4 {
-            color: var(--primary-blue);
-            text-align: right;
+        .btn-card:hover {
+            background-color: #3d8b40;
+        }
+
+        /* Why Us & About */
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .why-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px dashed var(--blue-light);
+        }
+
+        .why-card h4 {
+            color: var(--pink);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            color: var(--blue-dark);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-img {
+            flex: 1;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         /* Footer */
         footer {
-            background: var(--primary-blue);
+            background-color: var(--blue-dark);
             color: white;
-            padding: 50px 0 20px 0;
+            padding: 60px 0 20px 0;
         }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 30px;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
-        .footer-logo h3 {
-            font-size: 2rem;
-            color: var(--primary-yellow);
+        .footer-col h4 {
+            color: var(--yellow);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
         }
 
-        .footer-contact h4 {
-            font-size: 1.2rem;
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
             margin-bottom: 10px;
-            color: var(--accent-blue);
         }
 
-        .socials a {
-            color: white;
-            font-size: 1.5rem;
-            margin-right: 15px;
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
             transition: color 0.3s;
         }
 
-        .socials a:hover {
-            color: var(--primary-pink);
+        .footer-col ul li a:hover {
+            color: var(--pink);
         }
 
-        .copyright {
+        .footer-bottom {
             text-align: center;
-            padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
             font-size: 0.9rem;
         }
 
-        /* Mobile */
+        /* Container & Mobile */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--blue-dark);
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                flex-direction: column;
                 position: absolute;
-                top: 90px;
+                top: 100%;
                 left: 0;
                 width: 100%;
                 background: white;
-                text-align: center;
+                flex-direction: column;
                 padding: 20px;
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
             }
 
             .nav-links.active {
@@ -514,29 +498,21 @@
                 display: block;
             }
 
-            .hero-content {
-                flex-direction: column-reverse;
-                text-align: center;
+            .top-bar {
+                display: none;
             }
 
-            .hero-text {
-                padding-right: 0;
-                margin-top: 30px;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .hero-text h1 {
-                font-size: 2.5rem;
+            .hero {
+                height: 500px;
+                border-radius: 0 0 30px 30px;
             }
 
-            .hero-btns {
-                display: flex;
+            .about-content {
                 flex-direction: column;
-                gap: 15px;
-                align-items: center;
-            }
-
-            .btn-whatsapp {
-                margin-left: 0;
             }
         }
     </style>
@@ -544,17 +520,33 @@
 
 <body>
 
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone-alt"></i> (62) 98413-2889</span>
+                <span><i class="fas fa-envelope"></i> contato@invictuslocacoes.com.br</span>
+            </div>
+            <div class="social-top">
+                <span>Siga-nos: </span>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar">
-        <div class="container nav-content">
-            <div class="logo-container">
-                <img src="img/logo.jpeg" alt="Invictus Locações" class="logo">
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="/img/logo.jpeg" alt="Invictus Locações">
             </div>
             <ul class="nav-links">
-                <li><a href="#hero">Início</a></li>
-                <li><a href="#brinquedos">Brinquedos</a></li>
-                <li><a href="#combos">Combos</a></li>
-                <li><a href="#feedbacks">Depoimentos</a></li>
-                <li><a href="#contato" class="btn-nav">Fale Conosco</a></li>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#vantagens">Vantagens</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+                <li><a href="https://wa.me/5562984132889" target="_blank" class="btn-whatsapp-nav"><i
+                            class="fab fa-whatsapp"></i> WhatsApp</a></li>
             </ul>
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -562,181 +554,266 @@
         </div>
     </nav>
 
-    <section id="hero" class="hero">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
+    <section id="inicio" class="hero">
 
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1>A Diversão Chegou em <span class="highlight">Goiânia!</span></h1>
-                <p>Transforme sua festa em um evento inesquecível com os melhores brinquedos da região.</p>
-                <div class="hero-btns">
-                    <a href="#brinquedos" class="btn btn-primary pulsate">Ver Brinquedos</a>
-                    <a href="https://wa.me/5562984132889?text=Olá! Gostaria de um orçamento geral para minha festa."
-                        target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Orçamento Rápido</a>
-                </div>
-            </div>
-            <div class="hero-img-container">
-                <img src="img/low-angle-smiley-boy-bounce-house.jpg" alt="Crianças brincando" class="hero-main-img">
-            </div>
-        </div>
-        <div class="wave-bottom">
-            <svg viewBox="0 0 1440 320">
-                <path fill="#fdfbf7" fill-opacity="1"
-                    d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-                </path>
-            </svg>
-        </div>
-    </section>
+        <div class="sliding-background">
+            <img src="img/futebol-de-sabao.jpeg" alt="Futebol de Sabão">
+            <img src="img/touro-mecanico.jpeg" alt="Touro Mecânico">
+            <img src="img/pula-pula.jpeg" alt="Pula Pula">
+            <img src="img/escorregador-inflavel.jpeg" alt="Tobogã">
+            <img src="img/casa-de-bolinha.jpeg" alt="Casa de Bolinhas">
+            <img src="img/guerra-de-cotonete.jpeg" alt="Cotonete">
+            <img src="img/fliperama.jpeg" alt="Fliperama">
+            <img src="img/pebolin.jpeg" alt="Pebolim">
+            <img src="img/pula-pula-kids.jpeg" alt="Pula Pula Kids">
 
-    <section id="brinquedos" class="products">
+            <img src="img/futebol-de-sabao.jpeg" alt="Futebol de Sabão">
+            <img src="img/touro-mecanico.jpeg" alt="Touro Mecânico">
+            <img src="img/pula-pula.jpeg" alt="Pula Pula">
+            <img src="img/escorregador-inflavel.jpeg" alt="Tobogã">
+            <img src="img/casa-de-bolinha.jpeg" alt="Casa de Bolinhas">
+            <img src="img/guerra-de-cotonete.jpeg" alt="Cotonete">
+            <img src="img/fliperama.jpeg" alt="Fliperama">
+            <img src="img/pebolin.jpeg" alt="Pebolim">
+            <img src="img/pula-pula-kids.jpeg" alt="Pula Pula Kids">
+        </div>
+
+        <div class="hero-overlay"></div>
+
         <div class="container">
-            <h2 class="section-title">Escolha sua <span class="color-blue">Diversão</span></h2>
-            <div class="grid-container" id="toys-grid">
-            </div>
+            <h1>A Diversão Chegou em Goiânia!</h1>
+            <p>Transforme sua festa em um evento inesquecível com os melhores brinquedos da região.</p>
+            <a href="#produtos" class="btn-cta">ALUGUE AGORA MESMO!</a>
         </div>
     </section>
 
-    <section id="combos" class="combos">
-        <div class="container combo-content">
-            <div class="combo-text">
-                <h2>Monte seu Pacote Personalizado!</h2>
-                <p>Quer alugar mais de um brinquedo? Temos condições especiais para combos. Pula-pula + Piscina de
-                    Bolinhas + Pipoca? Você manda!</p>
-                <a href="https://wa.me/5562984132889?text=Olá Invictus! Gostaria de montar um pacote personalizado com vários brinquedos."
-                    target="_blank" class="btn btn-warning">Montar meu Combo Agora</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="feedbacks" class="testimonials">
+    <section class="features-strip">
         <div class="container">
-            <h2 class="section-title">Quem alugou, <span class="color-pink">Amou!</span></h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"O Touro Mecânico foi a atração da festa! Atendimento excelente e pontualidade na entrega aqui em
-                        Goiânia."</p>
-                    <h4>- Mariana S.</h4>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-star"></i>
+                    <h3>Qualidade</h3>
+                    <p>Brinquedos novos e seguros.</p>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Meus filhos amaram o Futebol de Sabão. Os brinquedos são muito novos e higienizados."</p>
-                    <h4>- Pedro H.</h4>
+                <div class="feature-item">
+                    <i class="fas fa-smile"></i>
+                    <h3>Compromisso</h3>
+                    <p>Satisfação garantida.</p>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Preço justo e montagem super rápida. A Invictus salvou o aniversário da minha pequena."</p>
-                    <h4>- Carla M.</h4>
+                <div class="feature-item">
+                    <i class="fas fa-shapes"></i>
+                    <h3>Variedade</h3>
+                    <p>Tudo para sua festa.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Inovação</h3>
+                    <p>O melhor entretenimento.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contato">
-        <div class="container footer-content">
-            <div class="footer-logo">
-                <h3>Invictus Locações</h3>
-                <p>Levando alegria para Goiânia e região.</p>
+    <section id="produtos" class="section">
+        <div class="container">
+            <h2 class="section-title">Nossos Brinquedos</h2>
+            <p class="section-subtitle">Conheça nossa variedade de opções para a sua diversão.</p>
+            <div class="products-grid" id="grid-brinquedos"></div>
+        </div>
+    </section>
+
+    <section id="vantagens" class="section bg-white">
+        <div class="container">
+            <h2 class="section-title">Por que escolher a Invictus?</h2>
+            <p class="section-subtitle">Entenda os motivos que fazem da Invictus a melhor escolha.</p>
+            <div class="why-us-grid">
+                <div class="why-card">
+                    <h4>Excelência</h4>
+                    <p>Garantindo a diversão e o sucesso de qualquer evento com equipamentos revisados.</p>
+                </div>
+                <div class="why-card">
+                    <h4>Atendimento</h4>
+                    <p>Nosso compromisso é com sua experiência. Atendimento rápido e humanizado.</p>
+                </div>
+                <div class="why-card">
+                    <h4>Segurança</h4>
+                    <p>Temos processos de montagem e entrega que garantem a segurança das crianças.</p>
+                </div>
+                <div class="why-card">
+                    <h4>Pontualidade</h4>
+                    <p>Chegamos no horário combinado para que sua festa comece sem atrasos.</p>
+                </div>
             </div>
-            <div class="footer-contact">
-                <h4>Contato</h4>
-                <p><i class="fab fa-whatsapp"></i> (62) 98413-2889</p>
-                <p><i class="fas fa-map-marker-alt"></i> Goiânia, GO</p>
-                <div class="socials">
-                    <a href="https://www.instagram.com/invictus.locacoes.brinquedos" target="_blank"><i
-                            class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://wa.me/5562984132889" class="btn-cta" style="font-size: 1rem;">ENVIAR WHATSAPP</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="section">
+        <div class="container about-content">
+            <div class="about-text">
+                <h2>Quem Somos</h2>
+                <p>Na <strong>Invictus Locações e Eventos</strong>, nós vendemos qualidade e realizamos sonhos, sempre
+                    com total dedicação, responsabilidade e parceria.</p>
+                <p>Priorizamos a confiança, o respeito e o bom atendimento, buscando transformar clientes em amigos
+                    através de serviços rápidos e de qualidade.</p>
+                <p>Que Deus, na sua infinita bondade, possa abençoar a todos nossos clientes e amigos!</p>
+                <div
+                    style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-left: 5px solid var(--blue-dark); border-radius: 5px;">
+                    <strong>Garantia de Satisfação:</strong> Sua diversão é nossa prioridade.
+                </div>
+            </div>
+            <div class="about-img">
+                <img src="/img/logo.jpeg" style="width: 400px; height: 400px;" alt="logo" srcset="">
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="section bg-white">
+        <div class="container">
+            <h2 class="section-title">Nossos Clientes</h2>
+            <p class="section-subtitle">Veja o que dizem sobre a Invictus.</p>
+            <div class="why-us-grid">
+                <div class="why-card" style="background: white; border: 1px solid #eee;">
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <p>"Atendimento excelente! O Touro Mecânico fez o maior sucesso na festa."</p>
+                    <strong>- Ana Paula</strong>
+                </div>
+                <div class="why-card" style="background: white; border: 1px solid #eee;">
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <p>"Muito pontuais e os brinquedos são super novos. Recomendo!"</p>
+                    <strong>- Marcos Silva</strong>
+                </div>
+                <div class="why-card" style="background: white; border: 1px solid #eee;">
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <p>"O Futebol de Sabão salvou o calor da festa. As crianças amaram."</p>
+                    <strong>- Juliana Costa</strong>
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <p>&copy; 2025 Invictus Locações e Eventos. Todos os direitos reservados.</p>
+    </section>
+
+    <footer id="contatos">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Invictus Locações</h4>
+                    <p>Aluguel de brinquedos para festas em Goiânia e região. Levando alegria e diversão com segurança.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Menu Rápido</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
+                        <li><a href="#sobre">Quem Somos</a></li>
+                        <li><a href="#contatos">Contatos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Brinquedos Populares</h4>
+                    <ul>
+                        <li><a href="#produtos">Futebol de Sabão</a></li>
+                        <li><a href="#produtos">Touro Mecânico</a></li>
+                        <li><a href="#produtos">Pula-Pula</a></li>
+                        <li><a href="#produtos">Tobogã</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contatos</h4>
+                    <ul style="color: #ddd;">
+                        <li><i class="fab fa-whatsapp"></i> (62) 98413-2889</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Goiânia - GO</li>
+                        <li><i class="fas fa-envelope"></i> contato@invictus.com</li>
+                    </ul>
+                    <a href="https://wa.me/5562984132889" class="btn-cta"
+                        style="font-size: 0.9rem; padding: 10px 20px; margin-top: 10px;">FALE CONOSCO</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Invictus Locações e Eventos. Todos os direitos reservados.</p>
+            </div>
         </div>
     </footer>
 
-    <script>
-        /* --- JAVASCRIPT (LÓGICA) --- */
+    <a href="https://wa.me/5562984132889?text=Olá Invictus! Gostaria de um orçamento." class="whatsapp-float"
+        target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-        // Dados dos Brinquedos
+    <script>
         const brinquedos = [
             {
-                nome: "Pula Pula Tradicional",
+                nome: "Pula-Pula 3,05m (Tradicional)",
                 img: "img/pula-pula.jpeg",
-                desc: "Diversão clássica para todas as idades."
+                desc: "Cama Elástica Grande.<br><strong>Medida:</strong> 3,05m de diâmetro.<br>Não acompanha monitor."
             },
             {
-                nome: "Pula Pula Kids",
+                nome: "Pula-Pula 2,44m (Kids)",
                 img: "img/pula-pula-kids.jpeg",
-                desc: "Colorido e seguro para crianças menores."
+                desc: "Ideal para crianças menores.<br><strong>Medida:</strong> 2,44m de diâmetro.<br>Não acompanha monitor."
             },
             {
                 nome: "Pebolim (Totó)",
                 img: "img/pebolin.jpeg",
-                desc: "A disputa perfeita para adultos e crianças."
+                desc: "A disputa perfeita.<br><strong>Medidas:</strong> 1,35m x 0,82m.<br>Não acompanha monitor."
             },
             {
                 nome: "Touro Mecânico",
-                img: "img/Touro-mecanico.jpeg",
-                desc: "Desafie seus amigos! Quem segura mais tempo?"
+                img: "img/touro-mecanico.jpeg",
+                desc: "O desafio do Rodeio! Acompanha 1 monitor (4h).<br><strong>Medidas:</strong> 5m(C) x 5m(L).<br><strong>Espaço necessário:</strong> 6m x 6m.<br>Energia Monofásica."
             },
             {
-                nome: "Casa de Bolinhas",
+                nome: "Piscina de Bolinhas",
                 img: "img/casa-de-bolinha.jpeg",
-                desc: "Mergulhe em um mundo colorido de diversão."
+                desc: "Mergulhe na diversão.<br><strong>Medidas:</strong> 2,00m x 2,00m.<br>Não acompanha monitor."
             },
             {
-                nome: "Escorregador Inflável",
+                nome: "Tobogã (Escorregador)",
                 img: "img/escorregador-inflavel.jpeg",
-                desc: "Escalada e descida emocionante com segurança."
+                desc: "Escalada e descida emocionante.<br>Acompanha 1 Monitor (4h).<br><strong>Medidas:</strong> 5,00(C) x 3,00(L) x 4,20(A)."
             },
             {
                 nome: "Fliperama Arcade",
                 img: "img/fliperama.jpeg",
-                desc: "Nostalgia pura com milhares de jogos clássicos."
+                desc: "Nostalgia pura.<br><strong>Jogos:</strong> 2800 Jogos Clássicos.<br>Não acompanha monitor."
             },
             {
                 nome: "Futebol de Sabão",
                 img: "img/futebol-de-sabao.jpeg",
-                desc: "Escorregue, chute e divirta-se muito na água."
+                desc: "Diversão na água! Acompanha 1 monitor (4h).<br><strong>Medidas:</strong> 10m(C) x 5m(L).<br><strong>Espaço necessário:</strong> 17m x 6m."
             },
             {
                 nome: "Guerra de Cotonete",
                 img: "img/guerra-de-cotonete.jpeg",
-                desc: "Gladiadores modernos! Derrube o oponente."
+                desc: "Derrube o oponente! Acompanha 1 monitor (4h).<br><strong>Medidas:</strong> 5m(C) x 5m(L).<br><strong>Espaço necessário:</strong> 6m x 6m."
             }
         ];
 
+        const gridContainer = document.getElementById('grid-brinquedos');
         const telefoneWhatsApp = "5562984132889";
-        const gridContainer = document.getElementById('toys-grid');
 
-        // Gerar Cards
         brinquedos.forEach(brinquedo => {
-            const mensagem = encodeURIComponent(`Olá Invictus! Gostaria de saber a disponibilidade e preço do brinquedo: *${brinquedo.nome}* para minha festa.`);
+            const mensagem = encodeURIComponent(`Olá Invictus! Gostaria de saber mais sobre o *${brinquedo.nome}*.`);
             const linkZap = `https://wa.me/${telefoneWhatsApp}?text=${mensagem}`;
 
             const card = document.createElement('div');
-            card.classList.add('card');
-
+            card.className = 'product-card';
             card.innerHTML = `
-                <div style="overflow: hidden;">
-                    <img src="${brinquedo.img}" alt="${brinquedo.nome}" class="card-img">
-                </div>
-                <div class="card-content">
-                    <div>
-                        <h3>${brinquedo.nome}</h3>
-                        <p>${brinquedo.desc}</p>
-                    </div>
-                    <a href="${linkZap}" target="_blank" class="card-btn">
-                        <i class="fab fa-whatsapp"></i> Alugar este
+                <img src="${brinquedo.img}" alt="${brinquedo.nome}" class="product-img">
+                <div class="product-info">
+                    <h3>${brinquedo.nome}</h3>
+                    <p>${brinquedo.desc}</p>
+                    <a href="${linkZap}" target="_blank" class="btn-card">
+                        <i class="fab fa-whatsapp"></i> FALE CONOSCO
                     </a>
                 </div>
             `;
             gridContainer.appendChild(card);
         });
 
-        // Menu Mobile
+        // Mobile Menu
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
@@ -749,26 +826,7 @@
                 navLinks.classList.remove('active');
             });
         });
-
-        // Animação ao Scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        });
-
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.style.opacity = 0;
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
     </script>
 </body>
-
 
 </html>
